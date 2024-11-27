@@ -1,7 +1,10 @@
 import 'dotenv/config';
-import express from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
+import APIError from './utils/APIError';
+
+import { STATUS_CODE_INTERNAL_SERVER_ERROR } from './utils/constants';
 
 const app = express();
 
@@ -17,5 +20,22 @@ app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
 app.use(cors());
 app.use(access);
+
+const errorHandler = (err: unknown, _req: Request, res: Response, _next: NextFunction) => {
+  if (err instanceof APIError) {
+    res.status(err.statusCode).json({
+      error_code: err.error_code,
+      error_description: err.error_description,
+    });
+  } else {
+    res.status(STATUS_CODE_INTERNAL_SERVER_ERROR).json({
+      error_code: "INTERNAL_SERVER_ERROR",
+      error_description: "An unexpected error occurred.",
+    });
+  }
+};
+
+app.use(errorHandler);
+
 
 export default app;
