@@ -67,8 +67,6 @@ const TravelHistory: React.FC = () => {
   const hightLightColorIcon = useColorModeValue('black', 'cyan');
   const highLightColor = useColorModeValue('cyan.500', 'cyan.300');
 
-  console.log('TravelHistory', travelHistory);
-
   return (
     <Container h="100%">
       <Heading as="h2" size="xl" mb={6}>Histórico de Viagens</Heading>
