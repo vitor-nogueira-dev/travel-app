@@ -54,12 +54,12 @@ describe("Testing Controller layer", () => {
 
     it("Should return rides by customer ID and driver ID", async () => {
       const { req, res, next } = mockExpress({
-        params: { customerId: '1' },
+        params: { customer_id: '1' },
         query: { driver_id: '1' },
       });
 
       const getDriverByIdStub = stubServiceMethod('getDriverById', drivers[0]);
-      const getRidesByCustomerIdAndDriverIdStub = stubServiceMethod('getRidesByCustomerIdAndDriverId', rideResultByCustomer, true);
+      const getRidesByCustomerIdAndDriverIdStub = stubServiceMethod('getRidesByCustomerIdAndDriverId', rideResultByCustomer.rides, true);
 
       await ridesController.getRidesByCustomerIdAndDriverId(req, res, next);
 
