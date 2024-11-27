@@ -74,6 +74,37 @@ export const createTrip = createAsyncThunk(
   }
 );
 
+export const fetchTravelHistory = createAsyncThunk(
+  'travel/fetchTravelHistory',
+  async (driverId: string | undefined, { getState, rejectWithValue }) => {
+    const { travel } = getState() as { travel: ITravelState };
+    try {
+      const url = driverId && driverId !== '-1' ? `/${travel.userId}?driver_id=${driverId}` : `/${travel.userId}`;
+      const response = await api.get(url);
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        return rejectWithValue(error.response.data);
+      }
+      return rejectWithValue((error as Error).message);
+    }
+  }
+);
+
+export const fetchDrivers = createAsyncThunk(
+  'travel/fetchDrivers',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await api.get('/drivers');
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        return rejectWithValue(error.response.data);
+      }
+      return rejectWithValue((error as Error).message);
+    }
+  }
+);
 
 export const travelSlice = createSlice({
   name: 'travel',
@@ -126,11 +157,37 @@ export const travelSlice = createSlice({
 
         const error = action.payload as { error_description?: string };
         state.error = error?.error_description || 'Erro ao criar a viagem';
+      })
+      .addCase(fetchTravelHistory.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchTravelHistory.fulfilled, (state, action) => {
+        state.loading = false;
+        state.travelHistory = action.payload;
+      })
+      .addCase(fetchTravelHistory.rejected, (state, action) => {
+        state.loading = false;
+
+        const error = action.payload as { error_description?: string };
+        state.error = error?.error_description || 'Erro ao buscar o histórico de viagens';
+        state.travelHistory = {
+          customer_id: '',
+          rides: []
+        }
+      })
+      .addCase(fetchDrivers.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchDrivers.fulfilled, (state, action) => {
+        state.loading = false;
+        state.drivers = [{ name: 'Todos os Motoristas', id: -1 }, ...action.payload];
       });
   },
 });
 
-export const { setUserId, setOrigin, setDestination, setSelectedDriver } = travelSlice.actions;
+export const { setUserId, setOrigin, setDestination, setSelectedDriver, setTravelHistory } = travelSlice.actions;
 
 export default travelSlice.reducer;
 
