@@ -13,14 +13,11 @@ const getDriversByMinKm = async (km: number) => {
 
 const validateDistanceDriver = async (driverId: number, distance: number) => {
   const driver = await driversModel.getDriverById(driverId);
-
-  if (!driver.length) {
+  if (driver.length === 0) {
     throw new APIError(ERROR_CODE_DRIVER_NOT_FOUND, DESCRIPTION_DRIVER_NOT_FOUND, STATUS_CODE_NOT_FOUND);
   }
 
-  const distanceInKm = functions.convertMetersToKm(distance);
-
-  const distanceIsValid = driver[0]?.min_distance_km <= distanceInKm;
+  const distanceIsValid = driver[0]?.min_distance_km <= distance;
 
   if (!distanceIsValid) {
     throw new APIError(ERROR_CODE_INVALID_DISTANCE, DESCRIPTION_INVALID_DISTANCE, STATUS_CODE_NOT_ACCEPTABLE);
