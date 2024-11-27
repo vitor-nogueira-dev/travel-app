@@ -42,8 +42,25 @@ const getDrivers = async (_req: Request, res: Response, next: NextFunction): Pro
   }
 }
 
+const getRidesByCustomerIdAndDriverId = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
+  try {
+    const { customer_id } = req.params;
+    const { driver_id } = req.query || false;
+
+    driver_id && await drivesServices.getDriverById(Number(driver_id), true);
+
+    const rides = await rideServices.getRidesByCustomerIdAndDriverId(Number(customer_id), Number(driver_id) || undefined);
+
+    res.status(STATUS_CODE_OK).json({ customer_id, rides });
+  } catch (error) {
+    next(error);
+  }
+}
+
+
 export default {
   getRideEstimates,
   confirmRide,
-  getDrivers
+  getDrivers,
+  getRidesByCustomerIdAndDriverId
 };
