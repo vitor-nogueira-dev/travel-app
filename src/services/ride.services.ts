@@ -1,9 +1,10 @@
 import getRideEstimate from "./api.routes.services";
 import drivesServices from "./drives.services";
+import rideModel from "../models/ride.model";
 
 import APIError from "../utils/APIError";
 import functions from "../utils/functions";
-import { ERROR_CODE_INVALID_DATA, DESCRIPTION_INVALID_DATA } from "../utils/constants";
+import { ERROR_CODE_INVALID_DATA, DESCRIPTION_INVALID_DATA, STATUS_CODE_NOT_FOUND, ERROR_CODE_RIDE_NOT_FOUND, DESCRIPTION_RIDE_NOT_FOUND, STATUS_CODE_BAD_REQUEST } from "../utils/constants";
 
 const extractRouteDetails = (route: any) => {
   if (!route) return null;
@@ -31,12 +32,12 @@ const getRideEstimates = async (origin: string, destination: string) => {
     const route = estimate?.routes?.[0];
 
     if (!route) {
-      throw new APIError(ERROR_CODE_INVALID_DATA, DESCRIPTION_INVALID_DATA, 400);
+      throw new APIError(ERROR_CODE_INVALID_DATA, DESCRIPTION_INVALID_DATA, STATUS_CODE_BAD_REQUEST);
     }
 
     const routeDetails = extractRouteDetails(route);
     if (!routeDetails) {
-      throw new APIError(ERROR_CODE_INVALID_DATA, DESCRIPTION_INVALID_DATA, 400);
+      throw new APIError(ERROR_CODE_INVALID_DATA, DESCRIPTION_INVALID_DATA, STATUS_CODE_BAD_REQUEST);
     }
 
     const km = functions.convertMetersToKm(routeDetails.distanceMeters);
@@ -57,7 +58,17 @@ const getRideEstimates = async (origin: string, destination: string) => {
   }
 };
 
+const getRidesByCustomerIdAndDriverId = async (customerId: number, driverId?: number) => {
+  const rides = await rideModel.getRidesByCustomerIdAndDriverId(customerId, driverId);
+
+  if (!rides.length) {
+    throw new APIError(ERROR_CODE_RIDE_NOT_FOUND, DESCRIPTION_RIDE_NOT_FOUND, STATUS_CODE_NOT_FOUND);
+  }
+
+  return rides;
+}
 
 export default {
-  getRideEstimates
+  getRideEstimates,
+  getRidesByCustomerIdAndDriverId
 };
