@@ -46,8 +46,14 @@ const getDriverById = async (driverId: number, isGetRides?: boolean) => {
   return functions.formatDrivers(hasDriver as IDriverRaw[])[0];
 }
 
+const getDrivers = async () => {
+  const drivers = await driversModel.getDrivers();
+  return functions.formatDrivers(drivers as IDriverRaw[]);
+}
+
 export default {
   getDriversByMinKm,
   validateDistanceDriver,
-  getDriverById
+  getDriverById,
+  getDrivers,
 };
