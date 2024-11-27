@@ -215,14 +215,15 @@ http://localhost:8080
 ## Testes
 
 - **Backend:** Testes unitários utilizando Mocha e Chai. Para executar os testes:
-  1. Acesse o container do backend:
-  ```sh
-  docker exec -it taxi_api bash
-  ```
-  
-  2. Execute o comando:
-  ```sh
-  npm run test:mocha
-  ```
+
+1. Acesse o container do backend:
+```sh
+docker exec -it taxi_api bash
+```
+
+2. Execute o comando:
+```sh
+npm run test:mocha
+```
 
 --- 
