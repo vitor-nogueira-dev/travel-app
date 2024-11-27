@@ -12,7 +12,7 @@ const getRideEstimates = async (req: Request, res: Response, next: NextFunction)
 
     const estimate = await rideServices.getRideEstimates(origin, destination);
 
-    return res.status(STATUS_CODE_OK).json(estimate);
+    res.status(STATUS_CODE_OK).json(estimate);
   } catch (error) {
     next(error);
   }
