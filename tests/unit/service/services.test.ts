@@ -54,8 +54,8 @@ describe("Testing Service layer", () => {
     it("should return true when distance is valid", async () => {
       stubModelMethod('getDriverById', driveByMinKm);
 
-      const result = await drivesServices.validateDistanceDriver(1, 5);
-
+      const result = await drivesServices.validateDistanceDriver(2, 5);
+      
       chai.expect(result).to.be.true;
     });
     it("should return an error when distance is invalid", async () => {
@@ -94,12 +94,12 @@ describe("Testing Service layer", () => {
       chai.expect(result).to.deep.equal(rideEstimate);
     });
     it("should return rides by customer ID and driver ID when getRidesByCustomerIdAndDriverId is called", async () => {
-      stubServiceMethod('getRidesByCustomerIdAndDriverId', [rideResultByCustomer[0]], true);
+      stubServiceMethod('getRidesByCustomerIdAndDriverId', [rideResultByCustomer.rides[0]], true);
 
       const result = await ridesServices.getRidesByCustomerIdAndDriverId(1, 1);
 
       chai.expect(result).to.be.an('array');
-      chai.expect(result).to.deep.equal([rideResultByCustomer[0]]);
+      chai.expect(result).to.deep.equal([rideResultByCustomer.rides[0]]);
     });
 
     it("should return rides by customer ID when getRidesByCustomerId is called", async () => {
@@ -107,7 +107,7 @@ describe("Testing Service layer", () => {
 
       const result = await ridesServices.getRidesByCustomerIdAndDriverId(1);
 
-      chai.expect(result).to.be.an('array');
+      chai.expect(result).to.be.an('object');
       chai.expect(result).to.deep.equal(rideResultByCustomer);
     });
   });
