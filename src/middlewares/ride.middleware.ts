@@ -35,4 +35,25 @@ const addressIsTheSame = (req: Request, _res: Response, next: NextFunction): voi
   next();
 };
 
-export { hasAddress, hasCustomerBody, addressIsTheSame };
+const hasDriver = (req: Request, _res: Response, next: NextFunction): void => {
+  const { driver } = req.body;
+
+  if (!driver.id || !driver.name) {
+    return next(new APIError(ERROR_CODE_INVALID_DATA, DESCRIPTION_INVALID_DATA, 400));
+  }
+
+  next();
+}
+
+const hasDistance = (req: Request, _res: Response, next: NextFunction): void => {
+  const { distance } = req.body;
+
+  if (!distance) {
+    return next(new APIError(ERROR_CODE_INVALID_DATA, DESCRIPTION_INVALID_DATA, 400));
+  }
+
+  next();
+}
+
+
+export { hasAddress, hasCustomerBody, addressIsTheSame, hasDriver, hasDistance };
