@@ -41,10 +41,10 @@ export const stubServiceMethod = (method: keyof typeof drivesServices | keyof ty
   return sinon.stub(isRide ? ridesServices : drivesServices, method).resolves(returnValue);
 };
 
-export const expectError = (error: any, code: string, description: string) => {
+export const expectError = (error: APIError, code: string, description: string) => {
   chai.expect(error).to.be.an('error');
-  chai.expect((error as APIError).error_code).to.equal(code);
-  chai.expect((error as APIError).error_description).to.equal(description);
+  chai.expect(error.error_code).to.equal(code);
+  chai.expect(error.error_description).to.equal(description);
 };
 
 
