@@ -1,12 +1,15 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 
-import './globals.css';
+import { store } from './store/store';
 
 const App: React.FC = () => {
   return (
-    <section>
-      Hello World
-    </section>
+    <Provider store={store}>
+      <section>
+        Hello World
+      </section>
+    </Provider>
   );
 };
 
