@@ -5,6 +5,7 @@ import { Toaster } from 'sonner';
 import { useTheme } from 'next-themes';
 
 import Home from './pages/Home';
+import TravelOptions from '@/pages/TravelOptions';
 
 import Layout from './components/Layout';
 
@@ -25,6 +26,7 @@ const App: React.FC = () => {
         <Layout>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/travel-options" element={<TravelOptions />} />
           </Routes>
         </Layout>
       </Router>
