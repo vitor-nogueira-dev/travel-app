@@ -60,8 +60,8 @@ const getRideEstimates = async (origin: string, destination: string) => {
 
 const getRidesByCustomerIdAndDriverId = async (customerId: number, driverId?: number) => {
   const rides = await rideModel.getRidesByCustomerIdAndDriverId(customerId, driverId);
-
-  if (!rides.length) {
+  
+  if (rides.length === 0) {
     throw new APIError(ERROR_CODE_RIDE_NOT_FOUND, DESCRIPTION_RIDE_NOT_FOUND, STATUS_CODE_NOT_FOUND);
   }
 
