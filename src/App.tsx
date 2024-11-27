@@ -6,6 +6,7 @@ import { useTheme } from 'next-themes';
 
 import Home from './pages/Home';
 import TravelOptions from '@/pages/TravelOptions';
+import TravelHistory from '@/pages/TravelHistory';
 
 import Layout from './components/Layout';
 
@@ -27,6 +28,7 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/travel-options" element={<TravelOptions />} />
+            <Route path="/travel-history" element={<TravelHistory />} />
           </Routes>
         </Layout>
       </Router>
