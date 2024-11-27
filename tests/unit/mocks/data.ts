@@ -128,38 +128,41 @@ export const ridesByCustomer = [
   }
 ]
 
-export const rideResultByCustomer = [
-  {
-    id: 32,
-    date: '2024-11-25T10:25:44.000Z',
-    origin: 'Rua José Josino de Oliveira, 6, Barbacena',
-    destination: 'Rua Vitalino Rosa de Carvalho, 42, Cristiano Otoni',
-    distance: 55.7130012512207,
-    duration: '52m 5s',
-    driver: { id: 3, name: 'James Bond' },
-    value: 557.13
-  },
-  {
-    id: 31,
-    date: '2024-11-25T10:22:48.000Z',
-    origin: 'Rua José Josino de Oliveira, 6, Barbacena',
-    destination: 'Rua Vitalino Rosa de Carvalho, 42, Cristiano Otoni',
-    distance: 55.7130012512207,
-    duration: '52m 5s',
-    driver: { id: 2, name: 'Dominic Toretto' },
-    value: 278.57
-  },
-  {
-    id: 34,
-    date: '2024-11-25T07:31:41.000Z',
-    origin: 'Rua José Josino de Oliveira, 6, Barbacena',
-    destination: 'Rua Vitalino Rosa de Carvalho, 42, Cristiano Otoni',
-    distance: 55.7130012512207,
-    duration: '52m 5s',
-    driver: { id: 1, name: 'Homer Simpson' },
-    value: 139.28
-  }
-]
+export const rideResultByCustomer = {
+  customer_id: '1',
+  rides: [
+    {
+      id: 32,
+      date: '2024-11-25T10:25:44.000Z',
+      origin: 'Rua José Josino de Oliveira, 6, Barbacena',
+      destination: 'Rua Vitalino Rosa de Carvalho, 42, Cristiano Otoni',
+      distance: 55.7130012512207,
+      duration: '52m 5s',
+      driver: { id: 3, name: 'James Bond' },
+      value: 557.13
+    },
+    {
+      id: 31,
+      date: '2024-11-25T10:22:48.000Z',
+      origin: 'Rua José Josino de Oliveira, 6, Barbacena',
+      destination: 'Rua Vitalino Rosa de Carvalho, 42, Cristiano Otoni',
+      distance: 55.7130012512207,
+      duration: '52m 5s',
+      driver: { id: 2, name: 'Dominic Toretto' },
+      value: 278.57
+    },
+    {
+      id: 34,
+      date: '2024-11-25T07:31:41.000Z',
+      origin: 'Rua José Josino de Oliveira, 6, Barbacena',
+      destination: 'Rua Vitalino Rosa de Carvalho, 42, Cristiano Otoni',
+      distance: 55.7130012512207,
+      duration: '52m 5s',
+      driver: { id: 1, name: 'Homer Simpson' },
+      value: 139.28
+    }
+  ]
+}
 
 export const rideByCustomerAndDriver = [
   {
@@ -213,7 +216,7 @@ export const rideEstimate = {
     "latitude": -21.21791,
     "longitude": -43.78022
   },
-  "distance": 55.281,
+  "distance": 55281,
   "duration": "51m 49s",
   "options": [
     {
