@@ -1,5 +1,7 @@
 import helpers from "@googlemaps/polyline-codec";
+
 import { IDriver } from "../../src/interfaces/IDriver";
+import { IRawRide, IRide } from "../../src/interfaces/IRide";
 
 const decodedPolyline = (encodedPolyline: string) => helpers.decode(encodedPolyline);
 
@@ -36,9 +38,28 @@ const formatDrivers = (drivers: IDriver[]) =>
     value: driver.value,
   }));
 
+const transformRideData = (ride: IRawRide): IRide => ({
+  id: ride.id,
+  date: ride.date,
+  origin: ride.origin,
+  destination: ride.destination,
+  distance: ride.distance,
+  duration: ride.duration,
+  driver: ride.driver_id
+    ? {
+      id: ride.driver_id,
+      name: ride.driver_name as string
+    }
+    : null,
+  value: typeof ride.value === 'string'
+    ? parseFloat(ride.value)
+    : ride.value,
+});
+
 export default {
   decodedPolyline,
   convertMetersToKm,
   formatDuration,
-  formatDrivers
+  formatDrivers,
+  transformRideData
 }
