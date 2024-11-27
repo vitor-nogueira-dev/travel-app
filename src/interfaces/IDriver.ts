@@ -9,6 +9,6 @@ export interface IDriver {
   comment: string;
   value: number;
   min_distance_km: number;
-}
+};
 
 export interface IDriverRaw extends RowDataPacket, IDriver { }
