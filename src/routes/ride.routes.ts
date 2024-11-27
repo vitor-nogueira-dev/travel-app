@@ -1,7 +1,11 @@
 import express, { Request, Response, NextFunction } from "express";
 
 import driversController from "../controllers/ride.controller";
-import { hasCustomerBody, hasAddress, addressIsTheSame, hasDriver, hasDistance } from "../middlewares/ride.middleware"
+import { hasCustomerBody, hasAddress, addressIsTheSame, hasDriver, hasDistance } from "../middlewares/ride.middleware";
+
+import APIError from "utils/APIError";
+
+import { DESCRIPTION_INVALID_DATA, ERROR_CODE_INVALID_DATA } from "utils/constants";
 
 const driverRoutes = express.Router();
 
@@ -11,5 +15,8 @@ driverRoutes.patch('/confirm', hasCustomerBody, hasAddress, addressIsTheSame, ha
 
 driverRoutes.get('/drivers', driversController.getDrivers);
 
+driverRoutes.get('/', (_req: Request, _res: Response, next: NextFunction) => {
+  return next(new APIError(ERROR_CODE_INVALID_DATA, DESCRIPTION_INVALID_DATA, 400));
+});
 
 export default driverRoutes;
