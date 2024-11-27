@@ -19,7 +19,6 @@ const validateDistanceDriver = async (driverId: number, distance: number) => {
   }
 
   const distanceInKm = functions.convertMetersToKm(distance);
-  console.log('Distances [validateDistanceDriver]', driver[0]?.min_distance_km, distanceInKm);
 
   const distanceIsValid = driver[0]?.min_distance_km <= distanceInKm;
 
