@@ -18,6 +18,15 @@ const getDriversByMinKm = async (km: number): Promise<IDriverRaw[]> => {
   );
 }
 
+const getDriverById = async (id: number): Promise<IDriverRaw[]> => {
+  return executeQuery<IDriverRaw>(
+    `SELECT * FROM drivers WHERE id = ?;`,
+    [id]
+  );
+};
+
+
 export default {
   getDriversByMinKm,
+  getDriverById
 };
