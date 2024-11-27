@@ -62,7 +62,7 @@ describe("Testing Model layer", () => {
       const result = await ridesModel.getRidesByCustomerIdAndDriverId(1);
 
       chai.expect(result).to.be.an('array');
-      chai.expect(result).to.deep.equal(rideResultByCustomer);
+      chai.expect(result).to.deep.equal(rideResultByCustomer.rides);
     });
 
     it("should return rides by customer ID and driver ID when getRidesByCustomerIdAndDriverId is called", async () => {
