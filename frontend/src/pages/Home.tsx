@@ -50,9 +50,6 @@ const Home: React.FC = () => {
     }
     try {
       await dispatch(fetchTripOptions()).unwrap();
-      setUserId('');
-      setOrigin('');
-      setDestination('');
       navigate('/travel-options');
     } catch (error) {
       const errorMessage = (error as IErrorState)?.error_description || 'Erro desconhecido';
