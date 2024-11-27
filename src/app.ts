@@ -2,8 +2,10 @@ import 'dotenv/config';
 import express, { NextFunction, Request, Response } from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
-import APIError from './utils/APIError';
 
+import driverRoutes from './routes/ride.routes';
+
+import APIError from './utils/APIError';
 import { STATUS_CODE_INTERNAL_SERVER_ERROR } from './utils/constants';
 
 const app = express();
@@ -20,6 +22,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
 app.use(cors());
 app.use(access);
+
+app.use('/ride', driverRoutes);
 
 const errorHandler = (err: unknown, _req: Request, res: Response, _next: NextFunction) => {
   if (err instanceof APIError) {
