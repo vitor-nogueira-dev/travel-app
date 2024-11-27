@@ -18,7 +18,6 @@ const access: express.RequestHandler = (_, res, next) => {
 }
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
 app.use(cors());
 app.use(access);
