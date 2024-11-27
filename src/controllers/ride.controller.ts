@@ -32,7 +32,18 @@ const confirmRide = async (req: Request, res: Response, next: NextFunction): Pro
   }
 }
 
+const getDrivers = async (_req: Request, res: Response, next: NextFunction): Promise<void> => {
+  try {
+    const drivers = await drivesServices.getDrivers();
+
+    res.status(STATUS_CODE_OK).json(drivers);
+  } catch (error) {
+    next(error);
+  }
+}
+
 export default {
   getRideEstimates,
-  confirmRide
+  confirmRide,
+  getDrivers
 };
