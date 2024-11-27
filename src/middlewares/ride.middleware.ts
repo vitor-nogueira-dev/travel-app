@@ -15,6 +15,16 @@ const hasCustomerBody = (req: Request, _res: Response, next: NextFunction): void
   next();
 };
 
+const hasCustomerParam = (req: Request, _res: Response, next: NextFunction): void => {
+  const { customer_id } = req.params;
+
+  if (!customer_id || customer_id === '') {
+    return next(new APIError(ERROR_CODE_INVALID_DATA, DESCRIPTION_INVALID_DATA, 400));
+  }
+
+  next();
+};
+
 const hasAddress = (req: Request, _res: Response, next: NextFunction): void => {
   const { origin, destination } = req.body;
 
@@ -56,4 +66,4 @@ const hasDistance = (req: Request, _res: Response, next: NextFunction): void => 
 }
 
 
-export { hasAddress, hasCustomerBody, addressIsTheSame, hasDriver, hasDistance };
+export { hasAddress, hasCustomerBody, addressIsTheSame, hasDriver, hasDistance, hasCustomerParam };
