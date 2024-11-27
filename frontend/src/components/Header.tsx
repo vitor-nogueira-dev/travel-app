@@ -2,13 +2,22 @@ import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Box, Flex, Heading, HStack } from '@chakra-ui/react';
 import { LuCar, LuHistory, LuPlus } from 'react-icons/lu';
+import { useDispatch } from 'react-redux';
 
 import { Button } from '@/components/ui/button';
 import { ColorModeButton, useColorModeValue } from "@/components/ui/color-mode"
 
+import { setUserId } from '@/store/travelSlice';
+
 const Header: React.FC = () => {
+  const dispatch = useDispatch();
+
   const highlightColor = useColorModeValue('cyan.500', 'cyan.300');
   const hightLightColorIcon = useColorModeValue('black', 'white');
+
+  const handleClearUserId = () => {
+    dispatch(setUserId(''));
+  }
 
   return (
     <Box as="header" bg={{ base: "white", _dark: "gray.900" }} color="white" shadow="md">
@@ -21,7 +30,7 @@ const Header: React.FC = () => {
         </RouterLink>
         <HStack as="nav">
           <ColorModeButton colorPalette="cyan" />
-          <RouterLink to="/">
+          <RouterLink to="/" onClick={handleClearUserId}>
             <Button colorPalette="cyan" variant="outline">
               <LuPlus />
               Nova Viagem
