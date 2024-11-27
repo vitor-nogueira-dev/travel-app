@@ -227,3 +227,6 @@ npm run test:mocha
 ```
 
 --- 
+
+## Nota
+Este projeto foi desenvolvido como parte de um teste técnico para uma vaga de desenvolvedor Full Stack na [Shopper](https://landing.shopper.com.br/)
