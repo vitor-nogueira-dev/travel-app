@@ -10,7 +10,7 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
 import { AppDispatch, RootState } from '../store/store';
-import { setSelectedDriver, createTrip } from '../store/travelSlice';
+import { setSelectedDriver, createTrip, setOrigin, setDestination } from '../store/travelSlice';
 
 import { useColorModeValue } from '@/components/ui/color-mode';
 import EmptyStateComponent from '@/components/common/EmptyStateComponent';
@@ -42,6 +42,8 @@ const TravelOptions: React.FC = () => {
     try {
       dispatch(setSelectedDriver(driver));
       await dispatch(createTrip()).unwrap();
+      dispatch(setOrigin(''));
+      dispatch(setDestination(''));
       navigate('/travel-history');
     } catch (error) {
       console.error('Error confirming trip:', error);
