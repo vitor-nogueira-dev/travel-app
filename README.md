@@ -19,12 +19,17 @@ Desenvolvi uma aplicação conceito onde o usuário pode solicitar uma viagem de
    git clone https://github.com/vitor-nogueira-dev/travel-app.git
    ```
 
-2. Suba os containers das aplicações:
+2. Acesse o diretório do projeto:
+   ```sh
+   cd travel-app
+   ```
+
+3. Suba os containers das aplicações:
    ```sh
    docker-compose up
    ```
 
-3. Acesse a aplicação no navegador (frontend):
+4. Acesse a aplicação no navegador (frontend):
    ```sh
    http://localhost:80
    ```
@@ -214,6 +219,7 @@ http://localhost:8080
   ```sh
   docker exec -it taxi_api bash
   ```
+  
   2. Execute o comando:
   ```sh
   npm run test:mocha
